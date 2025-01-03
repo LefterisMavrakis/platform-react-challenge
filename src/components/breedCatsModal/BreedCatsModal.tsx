@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import { useNavigate, useParams } from "react-router";
 import Dialog from "@mui/material/Dialog";
 import Skeleton from "@mui/material/Skeleton";
@@ -8,13 +7,11 @@ import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
-import EastIcon from "@mui/icons-material/East";
 import theCatAPI from "../../api/api";
-import { Image } from "../../api/types";
-import { CardHeroImage } from "./styledComponents";
+import { ApiBreed, Image } from "../../api/types";
 import Flex from "../shared/styledFlex";
-import Typography from "@mui/material/Typography";
-import { AppButton } from "../shared/styledCommon";
+import { GridContainer } from "../shared/styledCommon";
+import CatItem from "../catItem/CatItem";
 
 const BootstrapDialog = styled(Dialog)(() => ({
   "& .MuiPaper-root": {
@@ -48,38 +45,39 @@ const BootstrapDialog = styled(Dialog)(() => ({
   },
 }));
 
-const CatModal = () => {
-  const { catId } = useParams();
+const BreedCatsModal = () => {
+  const { breedId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [catData, setCatData] = useState<Image | null>(null);
-
-  const { breeds, url, width, height } = catData || {};
+  const [listData, setListData] = useState<Image[]>([]);
 
   const navigate = useNavigate();
 
   const closeModal = () => {
-    navigate("/cats");
+    navigate("/breeds");
   };
 
   useEffect(() => {
     setIsLoading(true);
 
     theCatAPI.images
-      .getImage(catId!)
-      .then((image) => {
-        setCatData(image);
+      .searchImages({
+        limit: 20,
+        breeds: [breedId as ApiBreed],
+      })
+      .then((images) => {
+        setListData(images);
         setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [catId]);
+  }, [breedId]);
 
   return (
     <BootstrapDialog
       onClose={closeModal}
       aria-labelledby="customized-dialog-title"
-      open={!!catId}
+      open={!!breedId}
     >
       <DialogTitle
         sx={{ m: 0, p: 2, paddingRight: 7 }}
@@ -104,45 +102,27 @@ const CatModal = () => {
       <DialogContent dividers>
         {!isLoading ? (
           <Flex $flexDirection="column" $spacingSize="24px">
-            <CardHeroImage
-              $image={url!}
-              $width={width!}
-              $height={height!}
-            ></CardHeroImage>
-
-            <Flex $flexDirection="column" $spacingSize="16px">
-              <Typography variant="subtitle1">Breed</Typography>
-
-              <Flex $spacingSize="8px" $alignItems="center">
-                {breeds?.length ? (
-                  <Typography key={breeds[0].id}>{breeds[0].name}</Typography>
-                ) : (
-                  <Typography variant="body1">No breed found</Typography>
-                )}
-                <NavLink to="/breeds">
-                  <AppButton variant="contained" data-testid="shipments-button">
-                    <Flex $spacingSize="8px" $alignItems="center">
-                      <Typography variant="body2" style={{ fontWeight: "700" }}>
-                        Explore breeds
-                      </Typography>
-                      <EastIcon />
-                    </Flex>
-                  </AppButton>
-                </NavLink>
-              </Flex>
-            </Flex>
+            <GridContainer>
+              {listData.map((item) => {
+                return <CatItem itemData={item} key={item.id} />;
+              })}
+            </GridContainer>
           </Flex>
         ) : (
-          <Skeleton
-            animation={"wave"}
-            height={500}
-            width={500}
-            style={{ borderRadius: "40px", transform: "unset" }}
-          />
+          <GridContainer data-testid="breed-cats-skeleton">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <Skeleton
+                key={index}
+                animation={"wave"}
+                height={280}
+                style={{ borderRadius: "40px", transform: "unset" }}
+              />
+            ))}
+          </GridContainer>
         )}
       </DialogContent>
     </BootstrapDialog>
   );
 };
 
-export default CatModal;
+export default BreedCatsModal;

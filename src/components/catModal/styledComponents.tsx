@@ -11,6 +11,7 @@ export const CardHeroImage = styled.div<{
   max-height: 100vh;
   background-image: ${({ $image }) => `url(${$image})`};
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
+  border-radius: 40px;
 `;

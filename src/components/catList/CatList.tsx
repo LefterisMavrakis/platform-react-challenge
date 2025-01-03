@@ -1,4 +1,5 @@
 import Typography from "@mui/material/Typography";
+import Skeleton from "@mui/material/Skeleton";
 import { Image } from "../../api/types";
 import Flex from "../shared/styledFlex";
 import { AppButton } from "../shared/styledCommon";
@@ -26,6 +27,19 @@ const CatList = ({ listData, isLoading, onLoadMore }: CatListProps) => {
           {listData.map((item) => {
             return <CatItem itemData={item} key={item.id} />;
           })}
+
+          {isLoading && (
+            <>
+              {Array.from({ length: 10 }).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  animation={"wave"}
+                  height={470}
+                  style={{ borderRadius: "40px", transform: "unset" }}
+                />
+              ))}
+            </>
+          )}
         </GridContainer>
       </Flex>
 

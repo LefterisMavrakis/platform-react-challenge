@@ -1,15 +1,14 @@
 import { TheCatAPI } from "@thatapicompany/thecatapi";
 import axios from "axios";
 
-const theCatAPI = new TheCatAPI(
-  "live_pm6zrVEpUApZROPoyd9Z2hdqRhvjwYAclNksGqPrfRtbc3TFeKmLTisfZO5Mexa7"
-);
+const catApiKey = import.meta.env.VITE_CAT_API_KEY;
+
+const theCatAPI = new TheCatAPI(catApiKey);
 
 export const catApiAxiosClient = axios.create({
   baseURL: "https://api.thecatapi.com/",
   headers: {
-    "x-api-key":
-      "live_pm6zrVEpUApZROPoyd9Z2hdqRhvjwYAclNksGqPrfRtbc3TFeKmLTisfZO5Mexa7",
+    "x-api-key": catApiKey,
   },
 });
 

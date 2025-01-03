@@ -19,7 +19,7 @@ const CatItem = ({ itemData }: CatItemProps) => {
           <FavoriteBorderIcon color="inherit" />
         </IconBox>
 
-        <NavLink to={`${id}`}>
+        <NavLink to={`/cats/${id}`}>
           <IconBox aria-label="Show details">
             <InfoIcon color="inherit" />
           </IconBox>
