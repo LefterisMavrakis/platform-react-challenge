@@ -1,13 +1,17 @@
-@import './styles/variables';
+@import "./styles/variables";
 
 body {
-  background-color: #0E0063 !important;
+  background-color: #0e0063 !important;
+}
+
+#root {
+  width: 100%;
 }
 
 .app-wrapper {
   width: 100%;
   overflow-x: hidden;
-  background-color: #0E0063;
+  background-color: #0e0063;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -16,7 +20,8 @@ body {
 
   main {
     border-radius: $main-border;
-    background: linear-gradient(87.77deg, #F2EDFA 1.88%, #F9F9FF 51.92%, #E8E4F1 97.2%);
+    background: linear-gradient(87.77deg, #dbcdf1 1.88%, #dfdfe9 51.92%, #dcd7e5 97.2%);
+
     min-height: calc(100vh - $nav-height);
     padding: 44px 0;
   }

@@ -7,6 +7,7 @@ import {
 import CatBreedList from "../pages/CatBreeds";
 import Home from "../pages/Home";
 import MainLayout from "../layouts/MainLayout";
+import CatModal from "../components/catModal/CatModal";
 
 const AppRoutes = () => {
   return (
@@ -14,11 +15,11 @@ const AppRoutes = () => {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/cats" element={<Home />}>
-            <Route path=":id" element={<div>Cat modal</div>} />
+            <Route path=":catId" element={<CatModal />} />
           </Route>
 
           <Route path="/breeds" element={<CatBreedList />}>
-            <Route path=":id" element={<div>Breed modal</div>} />
+            <Route path=":breedId" element={<div>Breed modal</div>} />
           </Route>
 
           <Route path="/favourite-cats" element={<div>Favorite cats</div>} />

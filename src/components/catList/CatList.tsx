@@ -2,6 +2,8 @@ import Typography from "@mui/material/Typography";
 import { Image } from "../../api/types";
 import Flex from "../shared/styledFlex";
 import { AppButton } from "../shared/styledCommon";
+import CatItem from "../catItem/CatItem";
+import { GridContainer } from "../shared/styledCommon";
 
 type CatListProps = {
   listData: Image[];
@@ -10,8 +12,6 @@ type CatListProps = {
 };
 
 const CatList = ({ listData, isLoading, onLoadMore }: CatListProps) => {
-  console.log(listData);
-
   return (
     <Flex
       $flexDirection="column"
@@ -19,18 +19,14 @@ const CatList = ({ listData, isLoading, onLoadMore }: CatListProps) => {
       $spacingSize="32px"
       $fullwidth
     >
-      <Flex $flexDirection="column" $spacingSize="24px">
+      <Flex $flexDirection="column" $spacingSize="24px" $fullwidth>
         <Typography variant="h5">Cats list</Typography>
 
-        <Flex $spacingSize="12px" $wrap>
+        <GridContainer>
           {listData.map((item) => {
-            return (
-              <Flex key={item.id}>
-                <img src={item.url} width="100px" alt="" />
-              </Flex>
-            );
+            return <CatItem itemData={item} key={item.id} />;
           })}
-        </Flex>
+        </GridContainer>
       </Flex>
 
       <AppButton variant="contained" onClick={onLoadMore} disabled={isLoading}>

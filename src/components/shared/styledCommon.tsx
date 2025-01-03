@@ -70,10 +70,10 @@ export const Card = styled(Flex)`
 `;
 
 export const IconBox = styled.div`
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   color: #ffffff;
-  background-color: #31228e;
+  border: 2px solid #fff;
   padding: 5px;
   box-sizing: border-box;
   display: flex;
@@ -84,16 +84,26 @@ export const IconBox = styled.div`
 `;
 
 export const GradientIconBox = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
   color: #ffffff;
-  background: linear-gradient(0deg, #ffc8d1 0%, #fff6f7 100%);
+  background: linear-gradient(116deg, #ffc8d1 0%, #f3e1e3 100%);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   flex-shrink: 0;
+`;
+
+export const CircleImage = styled.div<{ $image: string }>`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: ${({ $image }) => `url(${$image})`};
+  background-position: center;
+  background-size: cover;
 `;
 
 export const StyledFlexBox = styled(Flex)`
@@ -104,4 +114,26 @@ export const StyledFlexBox = styled(Flex)`
 
 export const StyledFlexBoxWithBorder = styled(StyledFlexBox)`
   border-bottom: 2px solid #e8e6f2;
+`;
+
+export const GridContainer = styled.div<{ $cols?: number }>`
+  width: 100%;
+  display: grid;
+  flex-direction: column;
+  gap: 16px;
+  grid-template-columns: repeat(
+    ${({ $cols }) => $cols ?? "3"},
+    minmax(280px, 1fr)
+  );
+
+  @media (max-width: 1150px) {
+    grid-template-columns: repeat(
+      ${({ $cols }) => ($cols ? $cols - 1 : "2")},
+      minmax(280px, 1fr)
+    );
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(1, minmax(280px, 1fr));
+  }
 `;
