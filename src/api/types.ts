@@ -1,9 +1,25 @@
-import { Image } from "@thatapicompany/thecatapi/dist/types";
+import { Image as ApiImage } from "@thatapicompany/thecatapi/dist/types";
 import { Breed as ApiBreed } from "@thatapicompany/thecatapi/dist";
+
+export type Favourite = {
+  id: number;
+  userId: string;
+  imageId: string;
+  subId: string | null;
+  createdAt: Date;
+  image: {
+    id: string;
+    url: string;
+  };
+};
 
 export type Weight = {
   imperial: string;
   metric: string;
+};
+
+export type Image = ApiImage & {
+  favourite_id?: number;
 };
 
 export type Breed = {
@@ -47,4 +63,4 @@ export type Breed = {
   image: Image;
 };
 
-export type { Image, ApiBreed };
+export type { ApiBreed };

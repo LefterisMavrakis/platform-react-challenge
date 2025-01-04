@@ -1,4 +1,4 @@
-@import "./styles/variables";
+@use "./styles/variables" as v;
 
 body {
   background-color: #0e0063 !important;
@@ -19,10 +19,10 @@ body {
   padding-bottom: 50px;
 
   main {
-    border-radius: $main-border;
+    border-radius:  v.$main-border;
     background: linear-gradient(87.77deg, #dbcdf1 1.88%, #dfdfe9 51.92%, #dcd7e5 97.2%);
 
-    min-height: calc(100vh - $nav-height);
+    min-height: calc(100vh - v.$nav-height);
     padding: 44px 0;
   }
 }

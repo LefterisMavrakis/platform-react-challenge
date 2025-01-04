@@ -4,39 +4,43 @@ import theCatAPI from "../api/api";
 import { Image } from "../api/types";
 import CatList from "../components/catList/CatList";
 
-
 const Home = () => {
-    const [shouldFetch, setShouldFetch] = useState(true)
-    const [isLoading, setIsLoading] = useState(false);
-    const [catsList, setCatsList] = useState<Image[]>([]);
+  const [shouldFetch, setShouldFetch] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [catsList, setCatsList] = useState<Image[]>([]);
 
-    const handleLoadMore = () => {
-        setShouldFetch(true);
-      };
+  const handleLoadMore = () => {
+    setShouldFetch(true);
+  };
 
-    useEffect(() => {
-        if (!shouldFetch) return;
+  useEffect(() => {
+    if (!shouldFetch) return;
 
-        setIsLoading(true);
+    setIsLoading(true);
 
-        theCatAPI.images.searchImages({
-            limit: 10,
-        }).then((images) => {
-            setCatsList((prevCatList) => [
-                ...prevCatList,
-                ...images,
-              ])
-            setIsLoading(false)
-            setShouldFetch(false)
-         })
-    },[shouldFetch])
+    theCatAPI.images
+      .searchImages({
+        limit: 10,
+      })
+      .then((images) => {
+        setCatsList((prevCatList) => [...prevCatList, ...images]);
+        setIsLoading(false);
+        setShouldFetch(false);
+      });
+  }, [shouldFetch]);
 
-
-    return (
-        <>
-            <CatList listData={catsList} isLoading={isLoading} onLoadMore={handleLoadMore} />
-            <Outlet/>
-        </>)
-}
+  return (
+    <>
+      <CatList
+        pageTitle="Cats list"
+        listData={catsList}
+        isLoading={isLoading}
+        onLoadMore={handleLoadMore}
+        canToggleFavourite
+      />
+      <Outlet />
+    </>
+  );
+};
 
 export default Home;

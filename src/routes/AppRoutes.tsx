@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import MainLayout from "../layouts/MainLayout";
 import CatModal from "../components/catModal/CatModal";
 import BreedCatsModal from "../components/breedCatsModal/BreedCatsModal";
+import FavouriteCats from "../pages/FavouriteCats";
 
 const AppRoutes = () => {
   return (
@@ -23,7 +24,7 @@ const AppRoutes = () => {
             <Route path=":breedId" element={<BreedCatsModal />} />
           </Route>
 
-          <Route path="/favourite-cats" element={<div>Favorite cats</div>} />
+          <Route path="/favourites" element={<FavouriteCats />} />
 
           <Route path="*" element={<Navigate to="/cats" />} />
         </Route>

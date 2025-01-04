@@ -7,12 +7,20 @@ import CatItem from "../catItem/CatItem";
 import { GridContainer } from "../shared/styledCommon";
 
 type CatListProps = {
+  pageTitle: string;
+  canToggleFavourite?: boolean;
   listData: Image[];
   isLoading: boolean;
   onLoadMore?: () => void;
 };
 
-const CatList = ({ listData, isLoading, onLoadMore }: CatListProps) => {
+const CatList = ({
+  pageTitle,
+  canToggleFavourite,
+  listData,
+  isLoading,
+  onLoadMore,
+}: CatListProps) => {
   return (
     <Flex
       $flexDirection="column"
@@ -21,11 +29,17 @@ const CatList = ({ listData, isLoading, onLoadMore }: CatListProps) => {
       $fullwidth
     >
       <Flex $flexDirection="column" $spacingSize="24px" $fullwidth>
-        <Typography variant="h5">Cats list</Typography>
+        <Typography variant="h5">{pageTitle}</Typography>
 
         <GridContainer>
-          {listData.map((item) => {
-            return <CatItem itemData={item} key={item.id} />;
+          {listData.map((item, index) => {
+            return (
+              <CatItem
+                itemData={item}
+                key={`${item.id}_${index}`}
+                canToggleFavourite={canToggleFavourite}
+              />
+            );
           })}
 
           {isLoading && (
@@ -34,7 +48,7 @@ const CatList = ({ listData, isLoading, onLoadMore }: CatListProps) => {
                 <Skeleton
                   key={index}
                   animation={"wave"}
-                  height={470}
+                  height={397}
                   style={{ borderRadius: "40px", transform: "unset" }}
                 />
               ))}
@@ -43,9 +57,15 @@ const CatList = ({ listData, isLoading, onLoadMore }: CatListProps) => {
         </GridContainer>
       </Flex>
 
-      <AppButton variant="contained" onClick={onLoadMore} disabled={isLoading}>
-        {isLoading ? "Loading" : "Load more"}
-      </AppButton>
+      {!!onLoadMore && (
+        <AppButton
+          variant="contained"
+          onClick={onLoadMore}
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading" : "Load more"}
+        </AppButton>
+      )}
     </Flex>
   );
 };

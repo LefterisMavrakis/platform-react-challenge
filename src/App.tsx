@@ -1,12 +1,12 @@
-import "@fontsource-variable/montserrat"
-import { createTheme, ThemeProvider } from "@mui/material/styles"
-import CssBaseline from "@mui/material/CssBaseline"
-import AppRoutes from './routes/AppRoutes'
-import './App.scss'
-
+// @ts-ignore
+import "@fontsource-variable/montserrat";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import FavouritesContextProvider from "./context/favoritesContext/FavoritesContextProvider";
+import AppRoutes from "./routes/AppRoutes";
+import "./App.scss";
 
 function App() {
-
   const theme = createTheme({
     typography: {
       fontFamily: "'Montserrat Variable', sans-serif",
@@ -34,11 +34,12 @@ function App() {
     <div className="app-wrapper">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppRoutes />
-    
+        <FavouritesContextProvider>
+          <AppRoutes />
+        </FavouritesContextProvider>
       </ThemeProvider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

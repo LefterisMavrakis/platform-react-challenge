@@ -39,7 +39,7 @@ const Header = () => {
   const DrawerList = (
     <Box role="presentation" onClick={toggleDrawer}>
       <List>
-        <ListItem key={"companies"} disablePadding>
+        <ListItem key={"cats"} disablePadding>
           <NavLink
             to="/cats"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -50,13 +50,24 @@ const Header = () => {
           </NavLink>
         </ListItem>
 
-        <ListItem key={"companies"} disablePadding>
+        <ListItem key={"breeds"} disablePadding>
           <NavLink
             to="/breeds"
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItemButton>
               <ListItemText primary={"Breeds"} />
+            </ListItemButton>
+          </NavLink>
+        </ListItem>
+
+        <ListItem key={"favourites"} disablePadding>
+          <NavLink
+            to="/favourites"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItemButton>
+              <ListItemText primary={"Favourites"} />
             </ListItemButton>
           </NavLink>
         </ListItem>

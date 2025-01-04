@@ -83,7 +83,7 @@ const BreedCatsModal = () => {
         sx={{ m: 0, p: 2, paddingRight: 7 }}
         id="customized-dialog-title"
       >
-        Cat details
+        Breed cats
       </DialogTitle>
 
       <IconButton
@@ -104,7 +104,9 @@ const BreedCatsModal = () => {
           <Flex $flexDirection="column" $spacingSize="24px">
             <GridContainer>
               {listData.map((item) => {
-                return <CatItem itemData={item} key={item.id} />;
+                return (
+                  <CatItem itemData={item} key={item.id} canToggleFavourite />
+                );
               })}
             </GridContainer>
           </Flex>

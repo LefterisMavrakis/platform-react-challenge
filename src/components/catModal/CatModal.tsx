@@ -6,6 +6,8 @@ import Skeleton from "@mui/material/Skeleton";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import EastIcon from "@mui/icons-material/East";
@@ -15,6 +17,7 @@ import { CardHeroImage } from "./styledComponents";
 import Flex from "../shared/styledFlex";
 import Typography from "@mui/material/Typography";
 import { AppButton } from "../shared/styledCommon";
+import useFavourites from "../../context/favoritesContext/useFavorites";
 
 const BootstrapDialog = styled(Dialog)(() => ({
   "& .MuiPaper-root": {
@@ -52,6 +55,8 @@ const CatModal = () => {
   const { catId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [catData, setCatData] = useState<Image | null>(null);
+  const { addToFavourites } = useFavourites() || {};
+  const [favouriteSuccess, setFavouriteSuccess] = useState(false);
 
   const { breeds, url, width, height } = catData || {};
 
@@ -59,6 +64,14 @@ const CatModal = () => {
 
   const closeModal = () => {
     navigate("/cats");
+  };
+
+  const handleAddToFavorites = () => {
+    if (!catId || !addToFavourites) return;
+
+    addToFavourites(catId).then(() => {
+      setFavouriteSuccess(true);
+    });
   };
 
   useEffect(() => {
@@ -85,7 +98,20 @@ const CatModal = () => {
         sx={{ m: 0, p: 2, paddingRight: 7 }}
         id="customized-dialog-title"
       >
-        Cat details
+        <Flex $alignItems="center" $spacingSize="8px">
+          Cat details
+          <IconButton
+            onClick={handleAddToFavorites}
+            disabled={favouriteSuccess}
+            aria-label="Make favorite"
+          >
+            {favouriteSuccess ? (
+              <FavoriteIcon color="inherit" />
+            ) : (
+              <FavoriteBorderIcon color="inherit" />
+            )}
+          </IconButton>
+        </Flex>
       </DialogTitle>
 
       <IconButton
@@ -104,11 +130,7 @@ const CatModal = () => {
       <DialogContent dividers>
         {!isLoading ? (
           <Flex $flexDirection="column" $spacingSize="24px">
-            <CardHeroImage
-              $image={url!}
-              $width={width!}
-              $height={height!}
-            ></CardHeroImage>
+            <CardHeroImage $image={url!} $width={width!} $height={height!} />
 
             <Flex $flexDirection="column" $spacingSize="16px">
               <Typography variant="subtitle1">Breed</Typography>
@@ -119,12 +141,14 @@ const CatModal = () => {
                 ) : (
                   <Typography variant="body1">No breed found</Typography>
                 )}
+
                 <NavLink to="/breeds">
                   <AppButton variant="contained" data-testid="shipments-button">
                     <Flex $spacingSize="8px" $alignItems="center">
                       <Typography variant="body2" style={{ fontWeight: "700" }}>
                         Explore breeds
                       </Typography>
+
                       <EastIcon />
                     </Flex>
                   </AppButton>
