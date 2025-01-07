@@ -11,7 +11,7 @@ import {
   StyledFlexBoxWithBorder,
   CircleImage,
 } from "../shared/styledCommon";
-import BreedRating from "./BreedRating";
+import BreedRating from "../breedRating/BreedRating";
 
 export type BreedItemProps = {
   item: Breed;

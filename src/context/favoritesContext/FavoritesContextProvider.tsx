@@ -59,7 +59,7 @@ const FavouritesContextProvider: React.FC<{ children: React.ReactNode }> = ({
       if (!favoriteId) {
         theCatAPI.favourites
           .addFavourite(imageId)
-          .then((data) => {
+          ?.then((data) => {
             setIsToggleFavouritesLoading(false);
             initFavourites();
             resolve(data.id);
@@ -71,7 +71,7 @@ const FavouritesContextProvider: React.FC<{ children: React.ReactNode }> = ({
         return;
       }
 
-      theCatAPI.favourites.deleteFavourite(favoriteId).finally(() => {
+      theCatAPI.favourites.deleteFavourite(favoriteId)?.finally(() => {
         setFavourites([...favourites.filter((fav) => fav.id !== favoriteId)]);
         setIsToggleFavouritesLoading(false);
         resolve(null);
@@ -82,7 +82,7 @@ const FavouritesContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const initFavourites = async () => {
     await theCatAPI.favourites
       .getFavourites()
-      .then((data) => {
+      ?.then((data) => {
         setFavourites(data);
         setIsLoading(false);
       })

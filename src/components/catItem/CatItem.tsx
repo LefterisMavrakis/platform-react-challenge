@@ -9,7 +9,7 @@ import { IconBox } from "../shared/styledCommon";
 import { CatCard, CardContainer } from "./styledComponents";
 import useFavourites from "../../context/favoritesContext/useFavorites";
 
-type CatItemProps = {
+export type CatItemProps = {
   itemData: Image;
   canToggleFavourite?: boolean;
 };
@@ -21,6 +21,8 @@ const CatItem = ({ itemData, canToggleFavourite }: CatItemProps) => {
     useFavourites() || {};
 
   const handleToggleFavourite = () => {
+    if (isToggleFavoriteLoading) return;
+
     toggleFavorite!(favoriteId, id).then((responseId) => {
       setFavoriteId(responseId);
     });
@@ -31,12 +33,16 @@ const CatItem = ({ itemData, canToggleFavourite }: CatItemProps) => {
   }, []);
 
   return (
-    <CatCard $catImage={url}>
+    <CatCard $catImage={url} data-testid="cat-item" data-image-url={url}>
       <CardContainer>
         {canToggleFavourite && (
-          <IconBox onClick={handleToggleFavourite} aria-label="Make favorite">
+          <IconBox
+            onClick={handleToggleFavourite}
+            aria-label="Make favorite"
+            data-testid="cat-item-toggle-favorite-button"
+          >
             {isToggleFavoriteLoading ? (
-              <LoopIcon color="inherit" />
+              <LoopIcon color="inherit" data-testid="loading-icon" />
             ) : (
               <>
                 {!!favoriteId ? (
@@ -49,7 +55,7 @@ const CatItem = ({ itemData, canToggleFavourite }: CatItemProps) => {
           </IconBox>
         )}
 
-        <NavLink to={`/cats/${id}`}>
+        <NavLink to={`/cats/${id}`} data-testid="cat-item-details-button">
           <IconBox aria-label="Show details">
             <InfoIcon color="inherit" />
           </IconBox>
