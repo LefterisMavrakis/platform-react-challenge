@@ -47,6 +47,12 @@ npm run dev
 npx vitest run
 ```
 
+4. Run e2e tests
+
+```bash
+npx cypress run --spec "cypress/e2e/app.cy.ts" --headed
+```
+
 ## Application Implementation Summary
 
 The Cats Application is designed with three main views and two modal views, offering a user-friendly interface to explore, manage, and interact with cat-related data. Below is a detailed breakdown of its structure and functionality.
@@ -93,5 +99,4 @@ The Cats Application is designed with three main views and two modal views, offe
 - Success messages on successfull api actions
 - Error messages on failed api actions
 - React query for caching, handle loading/error states and efficient data management
-- Full unit test coverage
-- Add e2e tests
+- Full unit and e2e test coverage. Due to limited time available for the assignment because of my work commitments and recent holidays, i have written only one representative unit test for the CatItem component and one generic e2e test for the app

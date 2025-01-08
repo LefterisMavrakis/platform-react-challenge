@@ -101,7 +101,7 @@ const BreedCatsModal = () => {
 
       <DialogContent dividers>
         {!isLoading ? (
-          <Flex $flexDirection="column" $spacingSize="24px">
+          <Flex $flexDirection="column" $spacingSize="24px" data-testid="breed-cats-modal-content">
             <GridContainer>
               {listData.map((item) => {
                 return (

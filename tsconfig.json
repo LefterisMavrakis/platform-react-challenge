@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "types": ["node", "jest", "@testing-library/jest-dom"]
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "types": ["node", "jest", "@testing-library/jest-dom", "cypress"]
   },
   "files": [],
   "references": [

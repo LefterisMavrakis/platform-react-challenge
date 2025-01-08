@@ -46,9 +46,15 @@ const CatItem = ({ itemData, canToggleFavourite }: CatItemProps) => {
             ) : (
               <>
                 {!!favoriteId ? (
-                  <FavoriteIcon color="inherit" />
+                  <FavoriteIcon
+                    color="inherit"
+                    data-testid="favorite-icon-solid"
+                  />
                 ) : (
-                  <FavoriteBorderIcon color="inherit" />
+                  <FavoriteBorderIcon
+                    color="inherit"
+                    data-testid="favorite-icon-border"
+                  />
                 )}
               </>
             )}

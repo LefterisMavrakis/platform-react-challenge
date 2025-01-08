@@ -37,7 +37,7 @@ const BreedItem = ({ item }: BreedItemProps) => {
   } = item;
 
   return (
-    <Card $flexDirection="column" data-testid="company-item">
+    <Card $flexDirection="column" data-testid="breed-item">
       <StyledFlexBoxWithBorder
         $spacingSize="8px"
         $alignItems="center"
@@ -48,7 +48,7 @@ const BreedItem = ({ item }: BreedItemProps) => {
         </Flex>
 
         <NavLink to={`${id}`}>
-          <AppButton variant="contained" data-testid="shipments-button">
+          <AppButton variant="contained" data-testid="view-breed-cats-button">
             <Flex $spacingSize="8px" $alignItems="center">
               <Typography variant="body2" style={{ fontWeight: "700" }}>
                 View cats

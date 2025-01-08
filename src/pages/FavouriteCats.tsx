@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import CatList from "../components/catList/CatList";
 import useFavourites from "../context/favoritesContext/useFavorites";
 import { Image } from "../api/types";
+import Flex from "../components/shared/styledFlex";
 
 const FavouriteCats = () => {
   const { favourites, isLoading } = useFavourites() || {};
@@ -20,14 +21,14 @@ const FavouriteCats = () => {
   }, [favourites]);
 
   return (
-    <>
+    <Flex $fullwidth data-testid="favourite-cats-list">
       <CatList
         pageTitle="Favourite cats"
         listData={transformedFavouritesToImages}
         isLoading={isLoading ?? false}
         canToggleFavourite
       />
-    </>
+    </Flex>
   );
 };
 

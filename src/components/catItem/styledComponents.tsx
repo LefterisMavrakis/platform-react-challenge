@@ -33,5 +33,4 @@ export const CardContainer = styled(Flex)`
   align-items: center;
   gap: 24px;
   opacity: 0;
-  pointer-events: none;
 `;

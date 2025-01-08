@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "jest.config.ts"]
+  "include": ["src", "jest.config.ts", "cypress/e2e/app.cy.ts"]
 }

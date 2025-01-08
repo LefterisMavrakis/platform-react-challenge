@@ -129,7 +129,11 @@ const CatModal = () => {
 
       <DialogContent dividers>
         {!isLoading ? (
-          <Flex $flexDirection="column" $spacingSize="24px">
+          <Flex
+            $flexDirection="column"
+            $spacingSize="24px"
+            data-testid="cat-details-modal-content"
+          >
             <CardHeroImage $image={url!} $width={width!} $height={height!} />
 
             <Flex $flexDirection="column" $spacingSize="16px">
@@ -142,8 +146,8 @@ const CatModal = () => {
                   <Typography variant="body1">No breed found</Typography>
                 )}
 
-                <NavLink to="/breeds">
-                  <AppButton variant="contained" data-testid="shipments-button">
+                <NavLink to="/breeds" data-testid="explore-breeds-button">
+                  <AppButton variant="contained">
                     <Flex $spacingSize="8px" $alignItems="center">
                       <Typography variant="body2" style={{ fontWeight: "700" }}>
                         Explore breeds

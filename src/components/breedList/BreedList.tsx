@@ -24,7 +24,7 @@ const BreedList = () => {
   }, []);
 
   return (
-    <Flex $flexDirection="column" $spacingSize="24px" $fullwidth>
+    <Flex $flexDirection="column" $spacingSize="24px" $fullwidth data-testid="breeds-list">
       <Typography variant="h5">Breeds list</Typography>
 
       {!isLoading ? (
