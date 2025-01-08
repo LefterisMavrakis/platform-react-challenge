@@ -1,5 +1,6 @@
 // @ts-ignore
 import "@fontsource-variable/montserrat";
+import { ErrorBoundary } from "react-error-boundary";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import FavouritesContextProvider from "./context/favoritesContext/FavoritesContextProvider";
@@ -32,12 +33,14 @@ function App() {
 
   return (
     <div className="app-wrapper">
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <FavouritesContextProvider>
-          <AppRoutes />
-        </FavouritesContextProvider>
-      </ThemeProvider>
+      <ErrorBoundary fallback={<p>Oops. something went wrong</p>}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <FavouritesContextProvider>
+            <AppRoutes />
+          </FavouritesContextProvider>
+        </ThemeProvider>
+      </ErrorBoundary>
     </div>
   );
 }

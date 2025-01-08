@@ -1,50 +1,97 @@
-# React + TypeScript + Vite
+# GlobalWebIndex Engineering Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Exercise: CatLover
 
-Currently, two official plugins are available:
+Create a React application for cat lovers which is going to build upon thecatapi.com and will have 3 views.
+The **first** view displays a list of 10 random cat images and a button to load more. Clicking on any of those images opens a modal view with the image and the information about the cat’s breed if available. This would be a link to the second view below - the breed detail. The modal should also contain a form to mark the image as your favourite (a part of the third view as well). Make sure you can copy-paste the URL of the modal and send it to your friends - they should see the same image as you can see.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The **second** view displays a list of cat breeds. Each breed opens a modal again with a list of cat images of that breed. Each of those images must be a link to the image detail from the previous point.
 
-## Expanding the ESLint configuration
+The **third** view allows you do the following things:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Display your favourite cats
+- Remove an image from your favourites (use any UX option you like)
 
-- Configure the top-level `parserOptions` property like this:
+You can find the API documentation here: https://developers.thecatapi.com/
+We give you a lot of freedom in technologies and ways of doing things. We only insist on you using React.js. Get creative as much as you want, we WILL appreciate it. You will not be evaluated based on how well you follow these instructions, but based on how sensible your solution will be. In case you are not able to implement something you would normally implement for time reasons, make it clear with a comment.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Submission
+
+Once you have built your app, share your code in the mean suits you best
+Good luck, potential colleague!
+
+## Initialize project
+
+system requirements:
+
+- node >=18
+- npm >= 10
+
+1. Install dependencies:
+
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Create an `.env` at the root of the project. Create an env var inside `.env` VITE_CAT_API_KEY=<your_api_key>
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+3. Start the development server
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+4. Run unit tests
+
+```bash
+npx vitest run
+```
+
+## Application Implementation Summary
+
+The Cats Application is designed with three main views and two modal views, offering a user-friendly interface to explore, manage, and interact with cat-related data. Below is a detailed breakdown of its structure and functionality.
+
+1.  Home Page (Cat List View)
+
+    The Home Page serves as the primary view, displaying a list of cat cards.
+
+    - Cat Cards: Each card represents a cat and includes functionality to:
+    - Favorite/Unfavorite: Allows users to mark a cat as a favorite or remove it from favorites. This feature is designed to be consistent across the application, enabling users to favorite cats from any view where they appear.
+    - Details Button: Provides an option to view additional details about a specific cat. Clicking this button opens a modal with detailed information.
+
+    - Favorite Context Provider:
+      Manages the global state for favorites across the application.
+      Ensures seamless synchronization of the favorite mechanism in all views.
+      Handles API requests to keep the favorites state up-to-date.
+
+2.  Breeds List View
+
+    Displays a comprehensive list of all cat breeds with breed rating metrics.
+
+    - Breed data is fetched using a custom Axios instance, as the TheCatAPI npm module did not directly support retrieving breed lists.
+
+3.  Favorites View
+
+    Allows users to view and remove all the cats they have marked as favorites.
+    Leverages the Favorite Context Provider to display the favorite cats seamlessly.
+
+4.  Modal Views
+
+    - Cat Details Modal
+
+      Displays detailed information about a specific cat. Uses React Router's modal routes, allowing the modal to be bookmarkable and shareable.
+      Provides a smooth user experience for sharing cat details with friends.
+
+    - Bree cats modal
+
+      Displays a list of cats of the selected breed
+
+## Improvements
+
+- Cat list virtualization
+- Also use load more logic on favourites page by leveraging directly the cat api instead of the npm module
+- Success messages on successfull api actions
+- Error messages on failed api actions
+- React query for caching, handle loading/error states and efficient data management
+- Full unit test coverage
+- Add e2e tests
