@@ -95,6 +95,7 @@ The Cats Application is designed with three main views and two modal views, offe
 ## Improvements
 
 - Cat list virtualization to prevent page unresponsiveness when the page becomes busy due to many results
+- Lazy loading mechanism for the images with intersection observer
 - Also use load more logic on favourites page by leveraging directly the cat api instead of the npm module
 - A scroll to top button would be helpfull
 - Success messages on successfull api actions
