@@ -101,4 +101,4 @@ The Cats Application is designed with three main views and two modal views, offe
 - Error messages on failed api actions
 - React query for caching, handle loading/error states and efficient data management
 - Break down some of the app component to smaller parts to improve readability, reusability and maintainability
-- Full unit and e2e test coverage. Due to limited time available for the assignment because of my work commitments and recent holidays, i have written only one representative unit test for the CatItem component and one generic e2e test for the app
+- Full unit and e2e test coverage
