@@ -48,7 +48,7 @@ const CatList = ({
                 <Skeleton
                   key={index}
                   animation={"wave"}
-                  height={397}
+                  height={476}
                   style={{ borderRadius: "40px", transform: "unset" }}
                 />
               ))}
